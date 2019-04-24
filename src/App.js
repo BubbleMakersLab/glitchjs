@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import ModuleStepper from "./components/ModuleProgess";
+import ModuleProgress from "./components/ModuleProgress";
 
 function App() {
   return (
     <div className="App">
-      <ModuleStepper/>
+      <ModuleProgress/>
     </div>
   );
 }

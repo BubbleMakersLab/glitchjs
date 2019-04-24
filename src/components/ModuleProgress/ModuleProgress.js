@@ -1,7 +1,7 @@
 import React from 'react';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
-export default class ModuleStepper extends React.Component {
+export default class ModuleProgress extends React.Component {
     constructor(props) {
         super(props)
 
