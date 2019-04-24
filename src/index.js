@@ -8,7 +8,7 @@ import selectionSharer from './selectionSharer'
 import './index.css';
 import 'share-this/dist/share-this.css'
 
-const container  = document.createElement('span')
+const container  = document.createElement('div')
 container.id = "root"
 document.getElementsByTagName('body')[0].appendChild(container)
 

@@ -1,30 +1,32 @@
 import React from "react"
 import ReactDOMServer from "react-dom/server"
 import shareThis from "share-this"
-import { FaSlack, FaHandsHelping, FaStickyNote } from "react-icons/fa"
-import { GoGlobe } from "react-icons/go"
+import QwantShare from "./components/QwantShare";
+import RaiseYoHand from "./components/RaiseYoHand";
+import TakeNote from "./components/TakeNote";
+import AskSlack from "./components/AskSlack";
 
 const slackSharer = {
     render() {
-        return ReactDOMServer.renderToStaticMarkup(<FaSlack />)
+        return ReactDOMServer.renderToStaticMarkup(<AskSlack />)
     }
 }
 
 const handsHelpingSharer = {
     render() {
-        return ReactDOMServer.renderToStaticMarkup(<FaHandsHelping />)
+        return ReactDOMServer.renderToStaticMarkup(<RaiseYoHand />)
     }
 }
 
 const searchSharer = {
     render() {
-        return ReactDOMServer.renderToStaticMarkup(<GoGlobe />)
+        return ReactDOMServer.renderToStaticMarkup(<QwantShare />)
     }
 }
 
 const noteSharer = {
     render() {
-        return ReactDOMServer.renderToStaticMarkup(<FaStickyNote />)
+        return ReactDOMServer.renderToStaticMarkup(<TakeNote />)
     }
 }
 
