@@ -1,18 +1,34 @@
-import shareThis from "share-this";
+import React from "react"
+import ReactDOMServer from "react-dom/server"
+import shareThis from "share-this"
+import { FaSlack, FaHandsHelping, FaStickyNote } from "react-icons/fa"
+import { GoGlobe } from "react-icons/go"
 
-const customSharer = {
+const slackSharer = {
     render() {
-        return "coucou"
+        return ReactDOMServer.renderToStaticMarkup(<FaSlack />)
     }
 }
 
-const customSharer2 = {
+const handsHelpingSharer = {
     render() {
-        return "JMM"
+        return ReactDOMServer.renderToStaticMarkup(<FaHandsHelping />)
+    }
+}
+
+const searchSharer = {
+    render() {
+        return ReactDOMServer.renderToStaticMarkup(<GoGlobe />)
+    }
+}
+
+const noteSharer = {
+    render() {
+        return ReactDOMServer.renderToStaticMarkup(<FaStickyNote />)
     }
 }
 
 export default shareThis({
     selector: 'body',
-    sharers: [customSharer ,customSharer2]
+    sharers: [searchSharer, slackSharer, handsHelpingSharer, noteSharer]
 });
