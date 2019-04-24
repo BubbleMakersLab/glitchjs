@@ -1,3 +1,4 @@
-import QwantShare from './qwant-share'
+import React from "react"
+import { GoGlobe } from "react-icons/go"
 
-export default QwantShare
+export default () => <a href={`https://www.qwant.com/?q=${window.getSelection().toString()}&t=web`} target="blank"><GoGlobe /></a>
