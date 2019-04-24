@@ -8,7 +8,10 @@ import selectionSharer from './selectionSharer'
 import './index.css';
 import 'share-this/dist/share-this.css'
 
-selectionSharer.init();
+const container  = document.createElement('span')
+container.id = "root"
+document.getElementsByTagName('body')[0].appendChild(container)
 
+selectionSharer.init();
 
 ReactDOM.render(<App />, document.getElementById('root'));
