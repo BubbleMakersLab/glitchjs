@@ -7,6 +7,8 @@ import DialogContentText from "@material-ui/core/DialogContentText/DialogContent
 import FilledInput from "@material-ui/core/FilledInput/FilledInput"
 import DialogActions from "@material-ui/core/DialogActions/DialogActions"
 
+import queryString from "query-string"
+
 import AppContext from "../../AppContext"
 
 export default class ChatDialog extends React.Component {
@@ -22,6 +24,7 @@ export default class ChatDialog extends React.Component {
     }
 
     handlePost = () => {
+        var qs = queryString.parse(window.location.search);
         this.textArea.select()
         document.execCommand('copy')
         window.getSelection().empty()
@@ -31,8 +34,12 @@ export default class ChatDialog extends React.Component {
                 window.open("slack://channel?team=TGKG907GE&id=CGJ28PMM2", "_blank")
             }.bind(this), 3000
         );
-        var url = `https://slack.com/api/chat.postMessage?token=${process.env.REACT_APP_ACCESS_TOKEN}&channel=CGJ28PMM2&as_user=true&text=${this.textArea.value}`
-        fetch(url)
+
+        var token = qs.token
+        var url = `https://slack.com/api/chat.postMessage?token=${token}&channel=CGJ28PMM2&as_user=true&text=${this.textArea.value}`
+        if (token) {
+            fetch(url)
+        }
     }
 
     render() {
