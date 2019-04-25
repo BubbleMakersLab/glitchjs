@@ -31,11 +31,13 @@ export default class ChatDialog extends React.Component {
                 window.open("slack://channel?team=TCH0UKXBQ&id=GH84LUPV5", "_blank")
             }.bind(this), 3000
         );
-        debugger
         fetch('https://slack.com/api/chat.postMessage', {
             method: 'POST',
+            headers: {
+                "Content-type": "application/json",
+                "Authorization": "Bearer " + process.env.REACT_APP_ACCESS_TOKEN
+            },
             body: JSON.stringify({
-                token: process.env.REACT_APP_ACCESS_TOKEN,
                 channel: "GH84LUPV5",
                 as_user: true,
                 text: this.textArea.value
