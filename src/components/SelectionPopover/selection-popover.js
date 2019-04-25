@@ -43,11 +43,11 @@ export default class SelectionPopover extends React.Component {
     handleAddComment = () => {
         const {commentValue} = this.state
 
-        this.setState({isOpen: false})
+        this.context.setIsPopoverOpen(false)
         this.context.setIsCommentInputOpen(false)
-        let comments = JSON.parse(localStorage.getItem("comments")) || []
+        let comments = JSON.parse(localStorage.getItem("comments")) || {}
 
-        comments.push(commentValue)
+        comments[this.context.currentSelectedStringId] = commentValue
 
         localStorage.setItem("comments", JSON.stringify(comments))
     }

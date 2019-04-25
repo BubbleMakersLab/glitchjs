@@ -14,7 +14,7 @@ export default class ChatDialog extends React.Component {
     static contextType = AppContext
 
     state = {
-        inputValue: `Bonjour à tous, j'ai une question concernant le passage suivant : ${window.getSelection()}, merci`
+        inputValue: `Bonjour à tous, j'ai une question concernant le passage suivant : ${this.context.currentSelectedString}, merci`
     }
 
     handleClose = () => {
@@ -29,7 +29,7 @@ export default class ChatDialog extends React.Component {
         setTimeout(
             function () {
                 window.open("slack://channel?team=TCH0UKXBQ&id=GH84LUPV5", "_blank")
-            }.bind(this), 3000
+            }, 3000
         );
         fetch('https://slack.com/api/chat.postMessage', {
             method: 'POST',
@@ -58,11 +58,11 @@ export default class ChatDialog extends React.Component {
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                         Le prof ou d'autres étudiants te répondront directement.
-                        </DialogContentText>
+                    </DialogContentText>
                     <FilledInput
                         id="filled-full-width"
                         label="Label"
-                        style={{ margin: 8 }}
+                        style={{margin: 8}}
                         placeholder="Écris ton message ici."
                         onChange={(e) => this.setState({ inputValue: e.target.value })}
                         value={inputValue}
@@ -74,7 +74,7 @@ export default class ChatDialog extends React.Component {
                 <DialogActions>
                     <Button onClick={this.handlePost} color="primary" autoFocus>
                         Poster le message
-                        </Button>
+                    </Button>
                 </DialogActions>
             </Dialog>
         )
