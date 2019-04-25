@@ -25,12 +25,13 @@ export default class ModuleProgress extends React.Component {
     };
 
     render() {
-        const {progress} = this.state
-        const {classes} = this.props
+        const { progress } = this.state
+        const { classes } = this.props
 
         return (
             <div className={classes.container}>
-                <LinearProgress variant="determinate" value={progress}/>
+                <LinearProgress variant="determinate" value={progress}
+                    classes={{ colorPrimary: classes.barBackground, bar: classes.barProgress }} />
             </div>
         );
     }
