@@ -5,16 +5,8 @@ import AppContext from "../../AppContext";
 export default class TakeNote extends React.Component {
     static contextType = AppContext;
 
-    componentDidMount() {
-
-    }
-
-    handleClick() {
-
-    }
-
     render() {
-        console.log(this.context)
-        return <span><FaStickyNote/></span>
+        const {onClick} = this.props
+        return <span onClick={onClick}><FaStickyNote/></span>
     }
 }

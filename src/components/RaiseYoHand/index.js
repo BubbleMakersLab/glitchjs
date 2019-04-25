@@ -10,7 +10,6 @@ export default class RaiseYoHand extends React.Component {
     }
 
     render() {
-        console.log(this.context)
         return <span onClick={this.handleClick}><FaHandsHelping/></span>
     }
 }
