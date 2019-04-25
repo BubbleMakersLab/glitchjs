@@ -13,3 +13,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.glitch-js-selected-text {
+  background-color: yellow;
+  border: 1px solid blue
+}
