@@ -13,6 +13,10 @@ export default class ChatDialog extends React.Component {
 
     static contextType = AppContext
 
+    state = {
+        inputValue: `Bonjour à tous, j'ai une question concernant le passage suivant : ${window.getSelection()}, merci`
+    }
+
     handleClose = () => {
         this.context.setIsDialogOpen(false)
     }
@@ -27,9 +31,21 @@ export default class ChatDialog extends React.Component {
                 window.open("slack://channel?team=TCH0UKXBQ&id=GH84LUPV5", "_blank")
             }.bind(this), 3000
         );
+        debugger
+        fetch('https://slack.com/api/chat.postMessage', {
+            method: 'POST',
+            body: JSON.stringify({
+                token: process.env.REACT_APP_ACCESS_TOKEN,
+                channel: "GH84LUPV5",
+                as_user: true,
+                text: this.textArea.value
+            })
+        });
     }
 
     render() {
+        const { inputValue } = this.state
+
         return (
             <Dialog
                 open={this.context.isDialogOpen}
@@ -46,7 +62,8 @@ export default class ChatDialog extends React.Component {
                         label="Label"
                         style={{ margin: 8 }}
                         placeholder="Écris ton message ici."
-                        value={`Bonjour à tous, j'ai une question concernant le passage suivant : ${window.getSelection()}, merci`}
+                        onChange={(e) => this.setState({ inputValue: e.target.value })}
+                        value={inputValue}
                         fullWidth
                         variant="filled"
                         inputRef={(textarea) => this.textArea = textarea}
