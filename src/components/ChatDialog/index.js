@@ -10,12 +10,20 @@ import DialogActions from "@material-ui/core/DialogActions/DialogActions"
 import AppContext from "../../AppContext"
 
 export default class ChatDialog extends React.Component {
-
     static contextType = AppContext
 
     state = {
-        inputValue: `Bonjour à tous, j'ai une question concernant le passage suivant : ${this.context.currentSelectedString}, merci`
+        inputValue: ""
     }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.isOpen !== this.props.isOpen) {
+            this.setState({
+                inputValue: `Bonjour à tous, j'ai une question concernant le passage suivant : ${this.context.currentSelectedString}, merci`
+            })
+        }
+    }
+
 
     handleClose = () => {
         this.context.setIsDialogOpen(false)
@@ -46,11 +54,12 @@ export default class ChatDialog extends React.Component {
     }
 
     render() {
-        const { inputValue } = this.state
+        const {inputValue} = this.state
+        const {isOpen} = this.props
 
         return (
             <Dialog
-                open={this.context.isDialogOpen}
+                open={isOpen}
                 onClose={this.handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description">
@@ -64,7 +73,7 @@ export default class ChatDialog extends React.Component {
                         label="Label"
                         style={{margin: 8}}
                         placeholder="Écris ton message ici."
-                        onChange={(e) => this.setState({ inputValue: e.target.value })}
+                        onChange={(e) => this.setState({inputValue: e.target.value})}
                         value={inputValue}
                         fullWidth
                         variant="filled"

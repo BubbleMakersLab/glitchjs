@@ -39,7 +39,7 @@ class App extends React.Component {
         isCommentInputOpen: false,
         isPopoverOpen: false,
         setIsPopoverOpen: (newValue) => {
-            this.setState({isPopoverOpen: newValue, ...this.initialCurrentSelected})
+            this.setState({isPopoverOpen: newValue})
         },
         setIsCommentInputOpen: (newValue) => {
             this.setState({isCommentInputOpen: newValue})
@@ -50,7 +50,7 @@ class App extends React.Component {
         closePopover: () => {
             if (this.state.currentSelector) {
                 document.querySelector(this.state.currentSelector).innerHTML = this.selectedInnerHTML
-                this.setState({isPopoverOpen: false})
+                this.setState({isPopoverOpen: false, ...this.initialCurrentSelected})
             }
         }
 
@@ -75,7 +75,8 @@ class App extends React.Component {
             const selectorTextContent = document.querySelector(mouseUpSelector).innerHTML.replace(/\n/g, "").replace(/\s+/g, ' ')
             const currentSelectedStringIndex = selectorTextContent.indexOf(currentSelectedString)
 
-            if (!currentSelectedString && !this.state.isPopoverOpen) {
+            if (!currentSelectedString && !this.state.isPopoverOpen && !this.state.isDialogOpen) {
+                console.log("delete")
                 this.setState({
                     ...this.initialCurrentSelected
                 })
@@ -100,13 +101,13 @@ class App extends React.Component {
     }
 
     render() {
-        const {isCommentOpen, currentSelectedStringId, commentPosition} = this.state
+        const {isCommentOpen, currentSelectedStringId, commentPosition, isDialogOpen} = this.state
 
         return <div className="App">
             <AppContext.Provider value={this.state}>
                 <ModuleProgress/>
                 <SelectionPopover/>
-                <ChatDialog/>
+                <ChatDialog isOpen={isDialogOpen}/>
                 <Snackbar/>
                 {isCommentOpen && <Comment commentId={currentSelectedStringId} position={commentPosition}/>}
             </AppContext.Provider>
