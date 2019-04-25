@@ -28,21 +28,11 @@ export default class ChatDialog extends React.Component {
         this.context.fireSnackBar(true)
         setTimeout(
             function () {
-                window.open("slack://channel?team=TCH0UKXBQ&id=GH84LUPV5", "_blank")
+                window.open("slack://channel?team=TGKG907GE&id=CGJ28PMM2", "_blank")
             }.bind(this), 3000
         );
-        fetch('https://slack.com/api/chat.postMessage', {
-            method: 'POST',
-            headers: {
-                "Content-type": "application/json",
-                "Authorization": "Bearer " + process.env.REACT_APP_ACCESS_TOKEN
-            },
-            body: JSON.stringify({
-                channel: "GH84LUPV5",
-                as_user: true,
-                text: this.textArea.value
-            })
-        });
+        var url = `https://slack.com/api/chat.postMessage?token=${process.env.REACT_APP_ACCESS_TOKEN}&channel=CGJ28PMM2&as_user=true&text=${this.textArea.value}`
+        fetch(url)
     }
 
     render() {
