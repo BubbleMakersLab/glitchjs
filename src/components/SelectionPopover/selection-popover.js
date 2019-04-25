@@ -5,10 +5,33 @@ import AskSlack from "../AskSlack";
 import Popover from "react-text-selection-popover";
 import React from "react";
 
-export default ({classes}) =>
-    <Popover className={classes.popover}>
-        <QwantShare/>
-        <RaiseYoHand/>
-        <TakeNote/>
-        <AskSlack/>
-    </Popover>
+
+export default class SelectionPopover extends React.Component{
+    state = {
+        isOpen: false
+    }
+
+    handleTextSelect = () => {
+        this.setState({isOpen: true})
+    }
+
+    handleTextUnSelect = () => {
+        console.log('coucou')
+        this.setState({isOpen: false})
+    }
+
+    render() {
+        const {classes} = this.props
+        const {isOpen} = this.state
+
+        return  <Popover className={classes.popover} isOpen={isOpen} onTextSelect={this.handleTextSelect} onTextUnSelect={this.handleTextUnSelect}>
+            <div className={classes.popoverButton}>
+                <QwantShare/>
+                <RaiseYoHand/>
+                <TakeNote/>
+                <AskSlack/>
+            </div>
+            <textarea> </textarea>
+        </Popover>
+    }
+}

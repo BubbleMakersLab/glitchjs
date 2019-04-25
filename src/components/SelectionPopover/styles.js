@@ -3,9 +3,11 @@ export default () => ({
         backgroundColor: "#333",
         color: "white",
         borderRadius: "0.25em",
-        display: "flex",
         userSelect: "none",
         pointerEvents: "auto !important",
+    },
+    popoverButton: {
+        display: "flex",
         "& *": {
             color: "white"
         },
@@ -18,5 +20,7 @@ export default () => ({
         "& > :first-child": {
             borderLeft: "none"
         }
+    },
+    commentInput: {
     }
 })
