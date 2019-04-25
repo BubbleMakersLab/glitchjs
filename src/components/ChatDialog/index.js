@@ -1,25 +1,20 @@
-import React from "react";
-import Button from "@material-ui/core/Button/Button";
-import {FaHandsHelping} from "react-icons/fa";
-import Dialog from "@material-ui/core/Dialog/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText";
-import FilledInput from "@material-ui/core/FilledInput/FilledInput";
-import DialogActions from "@material-ui/core/DialogActions/DialogActions";
-import AppContext from "../../AppContext";
+import React from "react"
+import Button from "@material-ui/core/Button/Button"
+import Dialog from "@material-ui/core/Dialog/Dialog"
+import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle"
+import DialogContent from "@material-ui/core/DialogContent/DialogContent"
+import DialogContentText from "@material-ui/core/DialogContentText/DialogContentText"
+import FilledInput from "@material-ui/core/FilledInput/FilledInput"
+import DialogActions from "@material-ui/core/DialogActions/DialogActions"
+import AppContext from "../../AppContext"
 
 export default class ChatDialog extends React.Component {
 
-    static contextType = AppContext;
-
-    handleClickOpen = () => {
-        this.setState({ open: true });
-    };
+    static contextType = AppContext
 
     handleClose = () => {
-        this.setState({ open: false });
-    };
+        this.context.setIsDialogOpen(false)
+    }
 
     render() {
         return (
