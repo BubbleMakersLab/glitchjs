@@ -1,10 +1,11 @@
-import React from 'react';
-import './App.css';
-import ModuleProgress from "./components/ModuleProgress";
-import SelectionPopover from "./components/SelectionPopover";
-import unique from "unique-selector";
+import React from 'react'
+import './App.css'
+import ModuleProgress from "./components/ModuleProgress"
+import SelectionPopover from "./components/SelectionPopover"
+import unique from "unique-selector"
 import AppContext from "./AppContext"
 import ChatDialog from "./components/ChatDialog"
+import Snackbar from './components/Snackbar'
 
 
 class App extends React.Component {
@@ -14,22 +15,27 @@ class App extends React.Component {
         currentSelector: null,
         currentSelectedString: null,
         currentSelectedStringIndex: 0,
+        fireSnackBar: (newValue) => {
+            this.setState({ isSnackOpen: newValue })
+        },
+        isSnackOpen: false,
         isDialogOpen: false,
         setIsDialogOpen: (newValue) => {
             this.setState({ isDialogOpen: newValue })
         }
+
     }
 
     componentDidMount() {
         document.addEventListener('mousedown', (event) => {
-            this.mouseDownSelector = unique(event.target);
-        }, false);
+            this.mouseDownSelector = unique(event.target)
+        }, false)
 
         document.addEventListener('mouseup', (event) => {
-            const mouseUpSelector = unique(event.target);
+            const mouseUpSelector = unique(event.target)
             const currentSelectedString = window.getSelection().toString()
 
-            if(!currentSelectedString) {
+            if (!currentSelectedString) {
                 this.setState({
                     currentSelector: null,
                     currentSelectedString: null,
@@ -45,19 +51,20 @@ class App extends React.Component {
                 })
             }
             this.mouseDownSelector = null
-        }, false);
+        }, false)
     }
 
     render() {
         return <div className="App">
             <AppContext.Provider value={this.state}>
-                <ModuleProgress/>
-                <SelectionPopover/>
+                <ModuleProgress />
+                <SelectionPopover />
                 <ChatDialog />
+                <Snackbar />
             </AppContext.Provider>
         </div>
     }
 
 }
 
-export default App;
+export default App
