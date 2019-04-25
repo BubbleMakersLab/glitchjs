@@ -13,7 +13,7 @@ function offset(el) {
     var rect = el.getBoundingClientRect(),
         scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
         scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+    return {top: rect.top + scrollTop, left: rect.left + scrollLeft}
 }
 
 class App extends React.Component {
@@ -32,6 +32,7 @@ class App extends React.Component {
         fireSnackBar: (newValue) => {
             this.setState({isSnackOpen: newValue})
         },
+        currentCommentSelector: null,
         commentPosition: {},
         isCommentOpen: false,
         isSnackOpen: false,
@@ -39,7 +40,7 @@ class App extends React.Component {
         isCommentInputOpen: false,
         isPopoverOpen: false,
         setIsPopoverOpen: (newValue) => {
-            this.setState({isPopoverOpen: newValue})
+            this.setState({isPopoverOpen: newValue, ...this.initialCurrentSelected})
         },
         setIsCommentInputOpen: (newValue) => {
             this.setState({isCommentInputOpen: newValue})
@@ -47,10 +48,13 @@ class App extends React.Component {
         setIsDialogOpen: (newValue) => {
             this.setState({isDialogOpen: newValue})
         },
+        setIsCommentOpen: (newValue) => {
+            this.setState({isCommentOpen: newValue})
+        },
         closePopover: () => {
             if (this.state.currentSelector) {
                 document.querySelector(this.state.currentSelector).innerHTML = this.selectedInnerHTML
-                this.setState({isPopoverOpen: false, ...this.initialCurrentSelected})
+                this.setState({isPopoverOpen: false})
             }
         }
 
@@ -58,8 +62,13 @@ class App extends React.Component {
 
     componentDidMount() {
         document.addEventListener('click', (event) => {
-            if (event.target.matches('.glitch-js-selected-text') || event.target.classList.contains('glitch-js-selected-text')) {
-                this.setState({isCommentOpen: true, currentSelectedStringId: event.target.id, commentPosition: offset(event.target)})
+            if (event.target.matches('.glitch-js-selected-text') || unique(event.target).indexOf("glitch-js-comment-dialog-delete-button") !== -1) {
+                this.setState({
+                    isCommentOpen: true,
+                    currentSelectedStringId: event.target.id,
+                    commentPosition: offset(event.target),
+                    currentCommentSelector: event.target.matches('.glitch-js-selected-text') ? unique(event.target) : this.state.currentCommentSelector
+                })
             } else {
                 this.setState({isCommentOpen: false})
             }
@@ -76,7 +85,6 @@ class App extends React.Component {
             const currentSelectedStringIndex = selectorTextContent.indexOf(currentSelectedString)
 
             if (!currentSelectedString && !this.state.isPopoverOpen && !this.state.isDialogOpen) {
-                console.log("delete")
                 this.setState({
                     ...this.initialCurrentSelected
                 })
