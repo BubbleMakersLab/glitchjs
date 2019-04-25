@@ -4,7 +4,7 @@ import ModuleProgress from "./components/ModuleProgress";
 import SelectionPopover from "./components/SelectionPopover";
 import unique from "unique-selector";
 import AppContext from "./AppContext"
-import ChatDialog from "./components/RaiseYoHand"
+import ChatDialog from "./components/ChatDialog"
 
 
 class App extends React.Component {
@@ -13,7 +13,11 @@ class App extends React.Component {
     state = {
         currentSelector: null,
         currentSelectedString: null,
-        currentSelectedStringIndex: 0
+        currentSelectedStringIndex: 0,
+        isDialogOpen: false,
+        setIsDialogOpen: (newValue) => {
+            this.setState({ isDialogOpen: newValue })
+        }
     }
 
     componentDidMount() {
