@@ -1,9 +1,11 @@
 export default () => ({
     popover: {
-        backgroundColor: "#555",
+        backgroundColor: "#333",
         color: "white",
-        borderRadius: "15px",
+        borderRadius: "0.25em",
         display: "flex",
+        userSelect: "none",
+        pointerEvents: "auto !important",
         "& *": {
             color: "white"
         },
@@ -11,6 +13,7 @@ export default () => ({
             padding: "5px 10px",
             color: "white",
             borderLeft: "1px solid white",
+            cursor: "pointer",
         },
         "& > :first-child": {
             borderLeft: "none"
